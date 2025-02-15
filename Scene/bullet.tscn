@@ -1,0 +1,83 @@
+[gd_scene load_steps=11 format=3 uid="uid://cyem625bvrvbe"]
+
+[ext_resource type="Script" path="res://Script/bullet.gd" id="1_clxpf"]
+[ext_resource type="Shader" uid="uid://oluw778hp2a1" path="res://Assets/Material/defaultUn.tres" id="2_kehx1"]
+[ext_resource type="Script" path="res://Script/pathGenerator.gd" id="3_40tv4"]
+[ext_resource type="PackedScene" uid="uid://ise7afxfxtfn" path="res://Scene/effect/spawn_shoot_fire.tscn" id="4_p24ek"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_8jm0j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0iobt"]
+render_priority = 0
+shader = ExtResource("2_kehx1")
+shader_parameter/UV_POS = null
+shader_parameter/Color = Color(0.775374, 0.589156, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_mg4rw"]
+offsets = PackedFloat32Array(0.419643, 0.486607, 0.5625)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.760784, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_oa4i0"]
+gradient = SubResource("Gradient_mg4rw")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y888s"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_kehx1")
+shader_parameter/UV_POS = Vector3(0, 0.416, 0)
+shader_parameter/Color = Color(1, 1, 1, 1)
+shader_parameter/Texture = SubResource("GradientTexture2D_oa4i0")
+
+[sub_resource type="Curve3D" id="Curve3D_shm2q"]
+resource_local_to_scene = true
+bake_interval = 10.85
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.217138, -0.0560262, 0.197576, 0, 0, 0, 0, 0, 0, -0.348153, 0.0133761, 0.327469, 0, 0, 0, 0, 0, 0, -0.493253, 0.143235, 0.516502),
+"tilts": PackedFloat32Array(0, 0, 0)
+}
+point_count = 3
+
+[node name="Bullet" type="Marker3D"]
+script = ExtResource("1_clxpf")
+
+[node name="Pos" type="Node3D" parent="."]
+transform = Transform3D(0.158177, 0, 0, 0, 0.158177, 0, 0, 0, 0.45523, 0, 0, 0)
+
+[node name="model" type="MeshInstance3D" parent="Pos"]
+transform = Transform3D(0.293796, 0, 0, 0, -1.19745e-08, 0.293797, 0, -0.273945, -1.28423e-08, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_8jm0j")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_0iobt")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[node name="Off" type="Node" parent="."]
+
+[node name="Line" type="CSGPolygon3D" parent="Off"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15036, 0.00263792)
+cast_shadow = 0
+polygon = PackedVector2Array(-0.00398733, 0.105232, 0.00454387, 0.198128, 0.00454387, 0.10618)
+mode = 2
+path_node = NodePath("../Path")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 69.0
+path_rotation = 1
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.27
+path_joined = false
+smooth_faces = true
+material = SubResource("ShaderMaterial_y888s")
+
+[node name="Path" type="Path3D" parent="Off"]
+curve = SubResource("Curve3D_shm2q")
+script = ExtResource("3_40tv4")
+
+[node name="SpawnShooFire" parent="." instance=ExtResource("4_p24ek")]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

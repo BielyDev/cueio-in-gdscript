@@ -1,0 +1,151 @@
+[gd_scene load_steps=8 format=3 uid="uid://dft0r6mi10qb8"]
+
+[ext_resource type="Script" path="res://Script/life.gd" id="1_hx60k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hcdba"]
+resource_local_to_scene = true
+transparency = 1
+albedo_color = Color(0, 1, 0.666667, 1)
+emission_enabled = true
+emission = Color(0, 1, 0.666667, 1)
+emission_energy_multiplier = 1.85
+
+[sub_resource type="Animation" id="Animation_d0sov"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Csg:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Csg:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Csg:material_override:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 1, 0.666667, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_axca4"]
+resource_name = "finished"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Csg:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Csg:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.46409, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Csg:material_override:albedo_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 1, 0.666667, 1), Color(0, 1, 0.666667, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_w5mls"]
+resource_name = "idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Csg:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.28319, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uj6is"]
+_data = {
+"RESET": SubResource("Animation_d0sov"),
+"finished": SubResource("Animation_axca4"),
+"idle": SubResource("Animation_w5mls")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dvtuq"]
+
+[node name="Life" type="Node3D"]
+script = ExtResource("1_hx60k")
+
+[node name="Csg" type="CSGCombiner3D" parent="."]
+material_override = SubResource("StandardMaterial3D_hcdba")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Csg"]
+size = Vector3(1, 0.4, 0.4)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Csg"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(1, 0.4, 0.4)
+
+[node name="Anima" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uj6is")
+}
+autoplay = "idle"
+
+[node name="Area" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 128
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area"]
+shape = SubResource("SphereShape3D_dvtuq")
+
+[node name="free" type="Timer" parent="."]
+wait_time = 8.0
+one_shot = true
+autostart = true
+
+[connection signal="animation_finished" from="Anima" to="." method="_on_anima_animation_finished"]
+[connection signal="body_entered" from="Area" to="." method="_on_area_body_entered"]
+[connection signal="timeout" from="free" to="." method="_on_free_timeout"]

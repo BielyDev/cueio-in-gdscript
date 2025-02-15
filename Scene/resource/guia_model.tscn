@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bsxunw35obtwa"]
+
+[node name="Guia_model" type="CSGCombiner3D"]
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.93588, 0)
+radius = 0.2
+height = 4.0
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1.93588, 0)
+radius = 0.2
+height = 4.0

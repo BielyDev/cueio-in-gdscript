@@ -1,0 +1,113 @@
+[gd_scene load_steps=6 format=3 uid="uid://ise7afxfxtfn"]
+
+[ext_resource type="Script" path="res://Script/spawn_shoo_fire.gd" id="1_wwl4h"]
+[ext_resource type="Texture2D" uid="uid://jnmfm00mm4w5" path="res://Assets/2D/Effects/smoke_0.png" id="2_oqals"]
+
+[sub_resource type="Animation" id="Animation_bpdsw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fire:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.286808, 0.286808, 0.286808)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fire/Sprite3D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.639216, 0.639216, 0.639216, 0.580392)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Fire/Sprite3D2:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.678431, 0.678431, 0.678431, 0.501961)]
+}
+
+[sub_resource type="Animation" id="Animation_hug3q"]
+resource_name = "start"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fire:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.166667, 0.233333),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Vector3(0.286808, 0.286808, 0.286808), Vector3(1, 1, 1.8), Vector3(0.0901786, 0.0901786, 2.34465), Vector3(0.05, 0.05, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fire/Sprite3D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.639216, 0.639216, 0.639216, 0.580392), Color(0.639216, 0.639216, 0.639216, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Fire/Sprite3D2:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.678431, 0.678431, 0.678431, 0.501961), Color(0.678431, 0.678431, 0.678431, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f1i8w"]
+_data = {
+"RESET": SubResource("Animation_bpdsw"),
+"start": SubResource("Animation_hug3q")
+}
+
+[node name="SpawnShooFire" type="Marker3D"]
+script = ExtResource("1_wwl4h")
+count = 2
+timer = 0.05
+
+[node name="Fire" type="Marker3D" parent="."]
+transform = Transform3D(0.286808, 0, 0, 0, 0.286808, 0, 0, 0, 0.286808, 0, 0, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="Fire"]
+transform = Transform3D(-7.18893e-09, 0, 0.164464, 0, 0.164464, 0, -0.164464, 0, -7.18893e-09, 0, 0, -0.296759)
+modulate = Color(0.639216, 0.639216, 0.639216, 0.580392)
+texture = ExtResource("2_oqals")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Fire"]
+transform = Transform3D(3.14238e-16, 0.164464, -7.18893e-09, 7.18893e-09, -7.18893e-09, -0.164464, -0.164464, 0, -7.18893e-09, 0, 0, -0.296759)
+modulate = Color(0.678431, 0.678431, 0.678431, 0.501961)
+texture = ExtResource("2_oqals")
+
+[node name="Anima" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f1i8w")
+}
+autoplay = "start"

@@ -1,0 +1,48 @@
+[gd_resource type="AnimationNodeBlendTree" load_steps=8 format=3 uid="uid://dnobdkmlv7ol5"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8qchj"]
+animation = &"shoot"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_pihpe"]
+input_0/name = "moviment"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "pistol"
+input_1/auto_advance = false
+input_1/break_loop_at_end = true
+input_1/reset = true
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_civlx"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wbby1"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6kfcl"]
+animation = &"jump"
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_n46o2"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_51qw0"]
+graph_offset = Vector2(-637.232, -45.8546)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_6kfcl")
+nodes/Animation/position = Vector2(-549.451, 197.802)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_civlx")
+"nodes/Animation 2/position" = Vector2(-505.494, 65.9341)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_wbby1")
+"nodes/Animation 3/position" = Vector2(-461.538, 329.67)
+nodes/moviment_state/node = SubResource("AnimationNodeBlend3_n46o2")
+nodes/moviment_state/position = Vector2(-21.978, 131.868)
+node_connections = [&"moviment_state", 0, &"Animation 2", &"moviment_state", 1, &"Animation", &"moviment_state", 2, &"Animation 3", &"output", 0, &"moviment_state"]
+
+[resource]
+graph_offset = Vector2(-306.065, 78.9283)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_8qchj")
+"nodes/Animation 2/position" = Vector2(65.9341, 439.56)
+nodes/arm_state/node = SubResource("AnimationNodeTransition_pihpe")
+nodes/arm_state/position = Vector2(527.473, 197.802)
+nodes/moviment_state/node = SubResource("AnimationNodeBlendTree_51qw0")
+nodes/moviment_state/position = Vector2(65.9341, 197.802)
+nodes/output/position = Vector2(681.319, 109.89)
+node_connections = [&"arm_state", 0, &"moviment_state", &"arm_state", 1, &"Animation 2", &"output", 0, &"arm_state"]

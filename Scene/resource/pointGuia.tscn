@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpf7e2qj83806"]
+
+[ext_resource type="Script" path="res://Script/point_guia.gd" id="1_61a0l"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_n55ls"]
+
+[node name="Point" type="PathFollow3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_61a0l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.203873, 0, 0, 0, 1.6, 0, 0, 0, 0.203873, 0, 0, 0)
+mesh = SubResource("BoxMesh_n55ls")

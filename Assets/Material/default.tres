@@ -1,0 +1,87 @@
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://dc5y7m1ject2h"]
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_4m4mr"]
+parameter_name = "Color"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_sfc1i"]
+source = 5
+
+[sub_resource type="VisualShaderNodeTextureParameterTriplanar" id="VisualShaderNodeTextureParameterTriplanar_mudpn"]
+parameter_name = "Texture"
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_15q84"]
+parameter_name = "Texture2DParameter"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_x387u"]
+operator = 2
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D Texture;
+uniform vec4 Color : source_color = vec4(1.000000, 1.000000, 1.000000, 1.000000);
+
+
+// TextureParameterTriplanar
+	vec4 triplanar_texture(sampler2D p_sampler, vec3 p_weights, vec3 p_triplanar_pos) {
+		vec4 samp = vec4(0.0);
+		samp += texture(p_sampler, p_triplanar_pos.xy) * p_weights.z;
+		samp += texture(p_sampler, p_triplanar_pos.xz) * p_weights.y;
+		samp += texture(p_sampler, p_triplanar_pos.zy * vec2(-1.0, 1.0)) * p_weights.x;
+		return samp;
+	}
+
+	uniform vec3 triplanar_scale = vec3(1.0, 1.0, 1.0);
+	uniform vec3 triplanar_offset;
+	uniform float triplanar_sharpness = 0.5;
+
+	varying vec3 triplanar_power_normal;
+	varying vec3 triplanar_pos;
+
+void vertex() {
+// TextureParameterTriplanar
+	{
+		triplanar_power_normal = pow(abs(NORMAL), vec3(triplanar_sharpness));
+		triplanar_power_normal /= dot(triplanar_power_normal, vec3(1.0));
+		triplanar_pos = VERTEX * triplanar_scale + triplanar_offset;
+		triplanar_pos *= vec3(1.0, -1.0, 1.0);
+	}
+}
+
+void fragment() {
+// TextureParameterTriplanar:5
+	vec4 n_out5p0 = triplanar_texture(Texture, triplanar_power_normal, triplanar_pos);
+
+
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(Texture, UV);
+
+
+// ColorParameter:2
+	vec4 n_out2p0 = Color;
+
+
+// VectorOp:7
+	vec3 n_out7p0 = vec3(n_out3p0.xyz) * vec3(n_out2p0.xyz);
+
+
+// Output:0
+	ALBEDO = n_out7p0;
+
+
+}
+"
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorParameter_4m4mr")
+nodes/fragment/2/position = Vector2(-460, 280)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_sfc1i")
+nodes/fragment/3/position = Vector2(-460, 120)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTextureParameterTriplanar_mudpn")
+nodes/fragment/5/position = Vector2(-860, -20)
+nodes/fragment/6/node = SubResource("VisualShaderNodeTexture2DParameter_15q84")
+nodes/fragment/6/position = Vector2(-460, 520)
+nodes/fragment/7/node = SubResource("VisualShaderNodeVectorOp_x387u")
+nodes/fragment/7/position = Vector2(60, 200)
+nodes/fragment/connections = PackedInt32Array(5, 1, 3, 2, 3, 0, 7, 0, 2, 0, 7, 1, 7, 0, 0, 0)

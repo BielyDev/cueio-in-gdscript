@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://cwee3744qxli7"]
+
+[ext_resource type="Script" path="res://Script/guia.gd" id="1_5ah14"]
+[ext_resource type="PackedScene" uid="uid://bsxunw35obtwa" path="res://Scene/resource/guia_model.tscn" id="2_0vxc3"]
+[ext_resource type="Shader" uid="uid://dc5y7m1ject2h" path="res://Assets/Material/default.tres" id="3_kym3c"]
+[ext_resource type="Script" path="res://Script/class/CastGuia.gd" id="3_r7uer"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0rrim"]
+radius = 1.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ypljy"]
+render_priority = 0
+shader = ExtResource("3_kym3c")
+shader_parameter/Color = Color(0.274755, 0.274755, 0.274755, 1)
+shader_parameter/triplanar_scale = Vector3(1, 1, 1)
+shader_parameter/triplanar_offset = null
+shader_parameter/triplanar_sharpness = 0.5
+
+[node name="Guia" type="Node3D"]
+script = ExtResource("1_5ah14")
+
+[node name="Guia_model" parent="." instance=ExtResource("2_0vxc3")]
+
+[node name="Casts" type="Node3D" parent="."]
+
+[node name="Cast" type="ShapeCast3D" parent="Casts"]
+shape = SubResource("SphereShape3D_0rrim")
+collision_mask = 128
+script = ExtResource("3_r7uer")
+
+[node name="Action" type="Label3D" parent="Casts/Cast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.2661, 0)
+visible = false
+pixel_size = 0.022
+billboard = 1
+text = "E"
+
+[node name="Line" type="CSGPolygon3D" parent="."]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0.0208416, 0, -0.0766983)
+polygon = PackedVector2Array(-0.0035267, -0.148842, -0.124627, -0.088292, -0.185178, 0.00858862, -0.120591, 0.1418, -0.0116, 0.19024, 0.117574, 0.15391, 0.166014, 0.00858862, 0.113538, -0.108475)
+mode = 2
+path_node = NodePath("../Path")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("ShaderMaterial_ypljy")
+
+[node name="Path" type="Path3D" parent="."]
+transform = Transform3D(1, 0, -2.98023e-08, 0, 1, 0, 2.98023e-08, 0, 1, 0.0208416, 0, -0.0766983)

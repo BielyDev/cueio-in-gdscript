@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cftjksia2q3m6"]
+
+[ext_resource type="Script" path="res://Script/area_demage.gd" id="1_spdpp"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fdioe"]
+radius = 0.356585
+height = 1.5575
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pee6j"]
+radius = 0.183
+
+[node name="AreaDemage" type="Node3D"]
+script = ExtResource("1_spdpp")
+
+[node name="Body" type="Area3D" parent="." groups=["player"]]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.30108, 0)
+shape = SubResource("CapsuleShape3D_fdioe")
+
+[node name="Head" type="Area3D" parent="." groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 0.999999, 0, 0, 0, 0.999999, 0, 0.65647, 0)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head"]
+shape = SubResource("SphereShape3D_pee6j")

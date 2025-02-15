@@ -1,0 +1,107 @@
+[gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://oluw778hp2a1"]
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_kbnvv"]
+expanded_output_ports = [0]
+parameter_name = "Color"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_efval"]
+expanded_output_ports = [0]
+source = 5
+
+[sub_resource type="VisualShaderNodeColorOp" id="VisualShaderNodeColorOp_n35f4"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_o0gs2"]
+parameter_name = "Texture"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_p57j3"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_j43ky"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_shgs6"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeVec3Parameter" id="VisualShaderNodeVec3Parameter_j1o1t"]
+parameter_name = "UV_POS"
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert, specular_schlick_ggx, depth_prepass_alpha, unshaded, shadows_disabled;
+
+uniform vec3 UV_POS;
+uniform vec4 Color : source_color = vec4(1.000000, 1.000000, 1.000000, 1.000000);
+uniform sampler2D Texture;
+
+
+
+void vertex() {
+// Input:3
+	vec2 n_out3p0 = UV;
+
+
+// Vector3Parameter:4
+	vec3 n_out4p0 = UV_POS;
+
+
+// VectorOp:2
+	vec3 n_out2p0 = vec3(n_out3p0, 0.0) + n_out4p0;
+
+
+// Output:0
+	UV = vec2(n_out2p0.xy);
+
+
+}
+
+void fragment() {
+// ColorParameter:2
+	vec4 n_out2p0 = Color;
+	float n_out2p4 = n_out2p0.a;
+
+
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(Texture, UV);
+	float n_out3p4 = n_out3p0.a;
+
+
+// ColorOp:4
+	vec3 n_out4p0 = min(vec3(n_out2p0.xyz), vec3(n_out3p0.xyz));
+
+
+// VectorOp:7
+	vec3 n_out7p0 = vec3(n_out2p4) * vec3(n_out3p4);
+
+
+// Output:0
+	ALBEDO = n_out4p0;
+	ALPHA = n_out7p0.x;
+
+
+}
+"
+modes/cull = 2
+flags/depth_prepass_alpha = true
+flags/unshaded = true
+flags/shadows_disabled = true
+nodes/vertex/2/node = SubResource("VisualShaderNodeVectorOp_j43ky")
+nodes/vertex/2/position = Vector2(40, 320)
+nodes/vertex/3/node = SubResource("VisualShaderNodeInput_shgs6")
+nodes/vertex/3/position = Vector2(-720, 280)
+nodes/vertex/4/node = SubResource("VisualShaderNodeVec3Parameter_j1o1t")
+nodes/vertex/4/position = Vector2(-480, 400)
+nodes/vertex/connections = PackedInt32Array(2, 0, 0, 4, 4, 0, 2, 1, 3, 0, 2, 0)
+nodes/fragment/0/position = Vector2(880, 180)
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorParameter_kbnvv")
+nodes/fragment/2/position = Vector2(-740, 120)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_efval")
+nodes/fragment/3/position = Vector2(-340, 540)
+nodes/fragment/4/node = SubResource("VisualShaderNodeColorOp_n35f4")
+nodes/fragment/4/position = Vector2(-20, 340)
+nodes/fragment/5/node = SubResource("VisualShaderNodeTexture2DParameter_o0gs2")
+nodes/fragment/5/position = Vector2(-820, 520)
+nodes/fragment/7/node = SubResource("VisualShaderNodeVectorOp_p57j3")
+nodes/fragment/7/position = Vector2(-20, 480)
+nodes/fragment/connections = PackedInt32Array(3, 0, 4, 1, 4, 0, 0, 0, 2, 0, 4, 0, 5, 0, 3, 2, 2, 4, 7, 0, 3, 4, 7, 1, 7, 0, 0, 1)

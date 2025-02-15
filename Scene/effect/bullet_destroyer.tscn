@@ -1,0 +1,87 @@
+[gd_scene load_steps=12 format=3 uid="uid://cknwutm4u2hav"]
+
+[ext_resource type="Texture2D" uid="uid://bgji307q1ov48" path="res://Assets/2D/Effects/shoot_1.png" id="1_yf8o8"]
+
+[sub_resource type="GDScript" id="GDScript_v5uwq"]
+script/source = "extends Node3D
+
+@onready var particles: GPUParticles3D = $Particles
+
+func _ready() -> void:
+	particles.set_emitting(true)
+"
+
+[sub_resource type="Gradient" id="Gradient_n2mjc"]
+offsets = PackedFloat32Array(0.155172, 0.280172, 0.594828)
+colors = PackedColorArray(0, 0, 0, 1, 0.0300941, 0.0300941, 0.0300941, 0.663043, 0.65098, 0.65098, 0.65098, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4jtkf"]
+gradient = SubResource("Gradient_n2mjc")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.2)
+metadata/_snap_enabled = true
+
+[sub_resource type="Curve" id="Curve_a2e1q"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_s100y"]
+curve = SubResource("Curve_a2e1q")
+
+[sub_resource type="Curve" id="Curve_h10i4"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.845268, -1), -1.43421, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_2b0k5"]
+curve = SubResource("Curve_h10i4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7s53n"]
+emission_shape = 1
+emission_sphere_radius = 0.3
+velocity_pivot = Vector3(0, 0, 8.38)
+spread = 0.0
+initial_velocity_min = 1.35
+initial_velocity_max = 1.35
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 2.0
+radial_accel_max = 2.0
+radial_accel_curve = SubResource("CurveTexture_2b0k5")
+scale_min = 0.3
+scale_max = 0.3
+alpha_curve = SubResource("CurveTexture_s100y")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4axw2"]
+transparency = 1
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_texture = ExtResource("1_yf8o8")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_u7qax"]
+material = SubResource("StandardMaterial3D_4axw2")
+
+[node name="Bullet" type="Node3D"]
+script = SubResource("GDScript_v5uwq")
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+size = Vector3(0.8, 0.8, 0.8)
+texture_albedo = SubResource("GradientTexture2D_4jtkf")
+upper_fade = 0.000721374
+
+[node name="Particles" type="GPUParticles3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+emitting = false
+amount = 10
+one_shot = true
+speed_scale = 1.27
+explosiveness = 0.35
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_7s53n")
+draw_pass_1 = SubResource("QuadMesh_u7qax")

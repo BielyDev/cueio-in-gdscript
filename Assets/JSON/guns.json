@@ -1,0 +1,33 @@
+{
+    "Knife" : {
+        "id" : 0,
+        "type" : 3,
+        "time" : 1,
+        "distance" : 5,
+        "demage" : 50,
+        "head_demage" : 50,
+
+        "path" : ""
+    },
+    "Glock" : {
+        "id" : 1,
+        "type" : 2,
+        "time" : 0.3,
+        "distance" : 25,
+        "demage" : 25,
+        "head_demage" : 50,
+
+        "path" : "res://Scene/Guns/glock.tscn"
+    },
+    "AK-47" : {
+        "id" : 2,
+        "type" : 1,
+        "time" : 0.1,
+        "distance" : 35,
+        "demage" : 15,
+        "head_demage" : 25,
+
+        "path" : ""
+    }
+
+}

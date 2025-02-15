@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://bppkqcpmssw8x"]
+
+[ext_resource type="Script" path="res://Script/screen/menu.gd" id="1_8h7ab"]
+[ext_resource type="Script" path="res://Script/server.gd" id="2_duil2"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8h7ab")
+
+[node name="CreateRoom" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -294.0
+offset_top = -210.0
+offset_right = 294.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_duil2")
+
+[node name="vbox" type="VBoxContainer" parent="CreateRoom"]
+layout_mode = 2
+alignment = 2
+
+[node name="buttons" type="HBoxContainer" parent="CreateRoom/vbox"]
+layout_mode = 2
+
+[node name="Create" type="Button" parent="CreateRoom/vbox/buttons"]
+layout_mode = 2
+text = "CREATE ROOM"
+
+[node name="Join" type="Button" parent="CreateRoom/vbox/buttons"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "JOIN"
+
+[connection signal="pressed" from="CreateRoom/vbox/buttons/Create" to="CreateRoom" method="_on_create_pressed"]
+[connection signal="pressed" from="CreateRoom/vbox/buttons/Join" to="CreateRoom" method="_on_join_pressed"]

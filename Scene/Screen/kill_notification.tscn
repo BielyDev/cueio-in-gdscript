@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuasmxujt0f1r"]
+
+[ext_resource type="Script" path="res://Script/screen/kill_notification.gd" id="1_42247"]
+[ext_resource type="Texture2D" uid="uid://cqu6j7rbr1f0t" path="res://icon.svg" id="1_icoex"]
+
+[sub_resource type="Animation" id="Animation_wyd0d"]
+resource_name = "start"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("vbox:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.7, 1.1),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kp7nk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("vbox:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0o2rl"]
+_data = {
+"RESET": SubResource("Animation_kp7nk"),
+"start": SubResource("Animation_wyd0d")
+}
+
+[node name="KillNotification" type="Control"]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+mouse_filter = 2
+script = ExtResource("1_42247")
+text = PackedStringArray("SUICIDE", "KILL", "HEADSHOT")
+icon = Array[Texture]([ExtResource("1_icoex"), ExtResource("1_icoex"), ExtResource("1_icoex")])
+
+[node name="vbox" type="VBoxContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.427083
+anchor_right = 0.572917
+offset_top = 25.0
+offset_bottom = 207.0
+grow_horizontal = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="texture" type="TextureRect" parent="vbox"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_icoex")
+stretch_mode = 5
+
+[node name="label" type="Label" parent="vbox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Headshot"
+horizontal_alignment = 1
+
+[node name="Anima" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0o2rl")
+}

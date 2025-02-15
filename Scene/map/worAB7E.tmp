@@ -1,0 +1,78 @@
+[gd_scene load_steps=12 format=3 uid="uid://bitpeti18vgu2"]
+
+[ext_resource type="PackedScene" uid="uid://d3of1224u7uml" path="res://Scene/Player/person.tscn" id="1_bcxym"]
+[ext_resource type="Script" path="res://Script/world.gd" id="1_civj8"]
+[ext_resource type="Script" path="res://Scene/Player/player.gd" id="3_0frwp"]
+[ext_resource type="Texture2D" uid="uid://dttcmuim272fr" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="4_iigw6"]
+[ext_resource type="Script" path="res://Script/server.gd" id="5_fyysa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xpv0m"]
+albedo_texture = ExtResource("4_iigw6")
+uv1_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_aw2ve"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_pnype"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_64ygf"]
+
+[sub_resource type="Sky" id="Sky_gltm6"]
+sky_material = SubResource("ProceduralSkyMaterial_64ygf")
+
+[sub_resource type="Environment" id="Environment_hu8td"]
+background_mode = 2
+sky = SubResource("Sky_gltm6")
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_civj8")
+
+[node name="Person" parent="." instance=ExtResource("1_bcxym")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("3_0frwp")
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="Map"]
+transform = Transform3D(15.9567, 0, 0, 0, 15.9567, 0, 0, 0, 15.9567, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_xpv0m")
+mesh = SubResource("PlaneMesh_aw2ve")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Map/Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_pnype")
+
+[node name="Settings" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Settings"]
+transform = Transform3D(0.258819, -0.836516, 0.482963, -7.19671e-09, 0.5, 0.866025, -0.965926, -0.224144, 0.12941, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Settings"]
+environment = SubResource("Environment_hu8td")
+
+[node name="Server" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 357.0
+offset_top = 370.0
+offset_right = 506.0
+offset_bottom = 488.0
+script = ExtResource("5_fyysa")
+
+[node name="Create" type="Button" parent="Server"]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "Create"
+
+[node name="Join" type="Button" parent="Server"]
+offset_left = 145.0
+offset_top = -2.0
+offset_right = 183.0
+offset_bottom = 29.0
+text = "Join"
+
+[connection signal="pressed" from="Server/Create" to="Server" method="_on_create_pressed"]
+[connection signal="pressed" from="Server/Join" to="Server" method="_on_join_pressed"]
