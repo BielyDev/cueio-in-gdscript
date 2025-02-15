@@ -144,10 +144,12 @@ func settings_player() -> void:
 	Gui = gui
 	LifeProgress = gui.LifeProgress
 
-@rpc("call_local")
+@rpc("any_peer")
 func new_kill(_death: int,_type: int) -> void:
 	kill += 1
-	Gui.KillNotification.start(_type)
+	
+	if is_multiplayer_authority():
+		Gui.KillNotification.start(_type)
 
 @rpc("call_local")
 func add_life(amount: int) -> void:

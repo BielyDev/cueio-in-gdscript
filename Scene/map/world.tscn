@@ -1,14 +1,14 @@
-[gd_scene load_steps=23 format=3 uid="uid://bitpeti18vgu2"]
+[gd_scene load_steps=19 format=3 uid="uid://bitpeti18vgu2"]
 
 [ext_resource type="Script" path="res://Script/world.gd" id="1_civj8"]
 [ext_resource type="Texture2D" uid="uid://dxbhvkubiaqkg" path="res://addons/kenney_prototype_textures/purple/texture_01.png" id="3_32l2o"]
 [ext_resource type="Texture2D" uid="uid://dikf4svx5002q" path="res://addons/kenney_prototype_textures/orange/texture_01.png" id="3_enqer"]
 [ext_resource type="Script" path="res://Script/instance.gd" id="4_ckgh3"]
 [ext_resource type="Texture2D" uid="uid://dttcmuim272fr" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="4_iigw6"]
-[ext_resource type="Script" path="res://Script/server.gd" id="5_fyysa"]
 [ext_resource type="Script" path="res://Script/class/CastGuia.gd" id="7_rv6ey"]
 [ext_resource type="PackedScene" uid="uid://jdrxsh0vhmw5" path="res://Scene/effect/trampoli.tscn" id="7_wbjs4"]
 [ext_resource type="PackedScene" uid="uid://cwee3744qxli7" path="res://Scene/resource/guia.tscn" id="8_dhcde"]
+[ext_resource type="Environment" uid="uid://clqy13gfsma8t" path="res://Assets/3D/Environment/main.tres" id="9_5k7of"]
 [ext_resource type="PackedScene" uid="uid://bsxunw35obtwa" path="res://Scene/resource/guia_model.tscn" id="9_s1qsy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m8tmf"]
@@ -55,22 +55,6 @@ _data = {
 }
 point_count = 4
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_64ygf"]
-
-[sub_resource type="Sky" id="Sky_gltm6"]
-sky_material = SubResource("ProceduralSkyMaterial_64ygf")
-
-[sub_resource type="Environment" id="Environment_hu8td"]
-background_mode = 2
-sky = SubResource("Sky_gltm6")
-
-[sub_resource type="Curve3D" id="Curve3D_4woci"]
-_data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0.245195, 12.5353, -15.153, 0, 0, 0, 0, 0, 0, -14.6769, 18.0727, -14.2709, 0, 0, 0, 0, 0, 0, -24.4891, 13.0065, -3.25105, 0, 0, 0, 0, 0, 0, -21.0379, 6.64441, 2.63741),
-"tilts": PackedFloat32Array(0, 0, 0, 0)
-}
-point_count = 4
-
 [node name="World" type="Node3D"]
 script = ExtResource("1_civj8")
 
@@ -103,7 +87,7 @@ material = SubResource("StandardMaterial3D_cvjl5")
 operation = 2
 radius = 38.1447
 height = 56.1757
-sides = 20
+sides = 32
 material = SubResource("StandardMaterial3D_uq7vm")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D"]
@@ -403,31 +387,7 @@ transform = Transform3D(0.258819, -0.836516, 0.482963, -7.19671e-09, 0.5, 0.8660
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Settings"]
-environment = SubResource("Environment_hu8td")
-
-[node name="Server" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 357.0
-offset_top = 370.0
-offset_right = 506.0
-offset_bottom = 488.0
-scale = Vector2(2.53035, 2.53035)
-script = ExtResource("5_fyysa")
-
-[node name="Create" type="Button" parent="Server"]
-layout_mode = 0
-offset_right = 60.0
-offset_bottom = 31.0
-text = "Create"
-
-[node name="Join" type="Button" parent="Server"]
-layout_mode = 0
-offset_left = 145.0
-offset_top = -2.0
-offset_right = 183.0
-offset_bottom = 29.0
-text = "Join"
+environment = ExtResource("9_5k7of")
 
 [node name="PosSecurity" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -453,23 +413,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.28223, 3.8147e-06, -12.797
 [node name="Marker3D7" type="Marker3D" parent="PosSecurity"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.9874, 3.8147e-06, -0.773976)
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://Scene/Player/person.tscn")
-spawn_path = NodePath("../Instance")
-
 [node name="Instance" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.02476, 0)
 script = ExtResource("4_ckgh3")
 
-[node name="Path3D" type="Path3D" parent="."]
-curve = SubResource("Curve3D_4woci")
-
-[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(-0.059009, 0.346768, 0.936093, -2.17555e-06, 0.937726, -0.347374, -0.998247, -0.0205004, -0.0553341, -11.2971, 16.8185, -14.4707)
-progress = 12.33
-
-[connection signal="pressed" from="Server/Create" to="Server" method="_on_create_pressed"]
-[connection signal="pressed" from="Server/Join" to="Server" method="_on_join_pressed"]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scene/Player/person.tscn")
+spawn_path = NodePath("../Instance")
 
 [editable path="Map/Acc/Guia"]
 [editable path="Map/Acc/Guia2"]

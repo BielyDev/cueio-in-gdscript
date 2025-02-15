@@ -4,7 +4,6 @@ const POINT_GUIA = preload("res://Scene/resource/pointGuia.tscn")
 
 @onready var Path: Path3D = $Path
 @onready var Casts: Node3D = $Casts
-@onready var lock_player: PathFollow3D = $Path/LockPlayer
 
 var area: Area3D = Area3D.new()
 
