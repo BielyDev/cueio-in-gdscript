@@ -1,20 +1,34 @@
 extends Node3D
 
-@onready var model: Node3D = $Point/Model
+const MODEL = preload("res://Scene/Player/model.tscn")
 
 var players: int
 
 func _ready() -> void:
-	Server.enet.peer_connected.connect(new_player)
-	Server.enet.peer_disconnected.connect(exit_player)
+	new_player(Host.my)
+	
+	#Server.Peer_connected.connect(new_player)
+	#Server.Peer_disconnected.connect(exit_player)
+	Server.Change_players.connect(reload_players)
 
-func new_player(id: int) -> void:
-	players += 1
+func reload_players(_players: Array) -> void:
+	players = 0
 	
-	var new_model = model.duplicate()
+	for child in get_children():
+		for new_model in child.get_children():
+			new_model.queue_free()
 	
-	new_model.name = str(id)
+	for player in _players:
+		new_player(player)
+
+func new_player(player: Dictionary) -> void:
+	var new_model = MODEL.instantiate()
+	
+	new_model.name = str(player.id)
 	get_child(players).add_child(new_model)
+	
+	new_model.get_node("my_name").text = str(player.nickname)
+	players += 1
 
 func exit_player(id: int) -> void:
 	for child in get_children():
