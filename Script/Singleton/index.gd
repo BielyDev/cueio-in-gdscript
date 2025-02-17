@@ -2,7 +2,7 @@ extends Node
 
 const PATH_GUN = "res://Assets/JSON/guns.json"
 
-var player: PersonCharacter
+var player: Node3D
 var all_players: Node3D
 var effect = Effect.new()
 

@@ -2,35 +2,32 @@ extends Node3D
 
 const MODEL = preload("res://Scene/Player/model.tscn")
 
-var players: int
-
 func _ready() -> void:
-	new_player(Host.my)
+	Host.Player_connected.connect(add_player)
+	Host.Player_disconnected.connect(remove_player)
 	
-	#Server.Peer_connected.connect(new_player)
-	#Server.Peer_disconnected.connect(exit_player)
-	Server.Change_players.connect(reload_players)
+	load_players()
 
-func reload_players(_players: Array) -> void:
-	players = 0
+func add_player() -> void:
+	load_players()
+func remove_player() -> void:
+	load_players()
+
+func load_players() -> void:
+	await get_tree().create_timer(1).timeout
 	
 	for child in get_children():
-		for new_model in child.get_children():
-			new_model.queue_free()
+		for model in child.get_children():
+			model.queue_free()
 	
-	for player in _players:
-		new_player(player)
+	for player_number in Host.players.size():
+		instance_player(get_child(player_number),Host.players[player_number])
 
-func new_player(player: Dictionary) -> void:
+func instance_player(parent: Node3D, profile: Dictionary) -> void:
 	var new_model = MODEL.instantiate()
 	
-	new_model.name = str(player.id)
-	get_child(players).add_child(new_model)
+	parent.add_child(new_model)
 	
-	new_model.get_node("my_name").text = str(player.nickname)
-	players += 1
-
-func exit_player(id: int) -> void:
-	for child in get_children():
-		if child.name.to_int() == id:
-			child.queue_free()
+	Index.player = new_model
+	new_model.set_multiplayer_authority(profile.id)
+	new_model.get_node("my_name").text = profile.nickname
