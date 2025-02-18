@@ -18,8 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 Index="*res://Script/Singleton/index.gd"
-Server="*res://Script/Singleton/server.gd"
 Host="*res://Script/class/host.gd"
+MessageServer="*res://Script/Singleton/message.gd"
 
 [display]
 

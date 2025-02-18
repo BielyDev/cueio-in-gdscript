@@ -1,59 +1,30 @@
 extends Node
 
-signal Player_connected()
-signal Player_disconnected(id: int)
-signal Change_my(profile: Dictionary)
+signal Connect_is_room(players: Array)
+signal New_player_in_room(players: Array)
+signal Change_my()
 
-var Enet: ENetMultiplayerPeer = ENetMultiplayerPeer.new()
+var Enet: ENetConnection = ENetConnection.new()
 
 var my: Dictionary = {
-	"id" : 1,
+	"id" : 0,
 	"nickname" : "my_name",
-	"color" : Color.ANTIQUE_WHITE
+	"color" : Color(1,1,1),
 }
+var players: Array
 
-var players: Array = []
-
-func _ready() -> void:
-	Enet.peer_connected.connect(new_connection)
-	Enet.peer_disconnected.connect(new_disconnected)
+func connect_to_server(ip: String = "127.0.0.1",port: int = 8000) -> bool:
+	var create_host_err: int = Enet.create_host()
+	if create_host_err != OK:
+		OS.alert("Falha ao criar host")
+		
+		return false
 	
-	players.append(my)
-
-func create_server(port: int) -> void:
-	var err = Enet.create_server(port, 4)
+	var connect_server: ENetPacketPeer = Enet.connect_to_host(ip, port)
+	if connect_server == null:
+		OS.alert("Falha ao conectar-se no servidor")
+		
+		return false
 	
-	if err != OK:
-		OS.alert("Erro ao criar sala!")
-	
-	multiplayer.multiplayer_peer = Enet
-
-func connect_client(ip: String, port: int) -> void:
-	var err = Enet.create_client(ip, port)
-	
-	if err != OK:
-		OS.alert("Erro ao conectar-se!")
-	
-	multiplayer.multiplayer_peer = Enet
-	my.id = multiplayer.multiplayer_peer.get_unique_id()
-	
-	await get_tree().create_timer(1).timeout
-	send_server_message.rpc_id(1,my)
-
-func new_connection(id: int) -> void:
-	print(id)
-func new_disconnected(id: int) -> void:
-	print(id)
-
-@rpc("any_peer","reliable")
-func send_server_message(message) -> void:
-	players.append(message)
-	
-	Player_connected.emit()
-	send_client_message.rpc(players)
-
-@rpc("authority","reliable")
-func send_client_message(message) -> void:
-	players = message
-	
-	Player_connected.emit()
+	MessageServer.set_process(true)
+	return true
