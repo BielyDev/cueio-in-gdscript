@@ -4,6 +4,8 @@ const MODEL = preload("res://Scene/Player/model.tscn")
 
 func _ready() -> void:
 	Host.New_player_in_room.connect(add_player)
+	
+	load_players(Host.players)
 	#Host..connect(remove_player)
 	pass
 	#load_players()
@@ -14,7 +16,6 @@ func remove_player(players: Array) -> void:
 	load_players(players)
 
 func load_players(players: Array) -> void:
-	await get_tree().create_timer(1).timeout
 	
 	for child in get_children():
 		for model in child.get_children():
@@ -31,3 +32,4 @@ func instance_player(parent: Node3D, profile: Dictionary) -> void:
 	Index.player = new_model
 	new_model.set_multiplayer_authority(profile.id)
 	new_model.get_node("my_name").text = profile.nickname
+	new_model.get_node("person/metarig/Skeleton3D/Model").update_color(profile.color)

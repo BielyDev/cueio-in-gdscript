@@ -4,7 +4,6 @@ extends Control
 
 var players_kills: Dictionary = {}
 
-@rpc("authority")
 func update(id: int) -> void:
 	
 	players_kills[id] = Index.player.kill

@@ -147,22 +147,26 @@ offset_top = 585.0
 offset_right = 210.0
 offset_bottom = 616.0
 
-[node name="Play" type="Button" parent="Buttons" node_paths=PackedStringArray("Node_selected")]
+[node name="Room" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "PLAY"
+
+[node name="Start" type="Button" parent="Buttons"]
+visible = false
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 text = "PLAY
 "
-script = ExtResource("3_qj38g")
-Node_selected = NodePath("../../Servers")
 
-[node name="Room" type="Button" parent="Buttons" node_paths=PackedStringArray("Node_selected")]
+[node name="Ready" type="Button" parent="Buttons"]
+visible = false
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "ROOM"
-script = ExtResource("3_qj38g")
-Node_selected = NodePath("../../Servers")
+text = "READY"
 
 [node name="NewRoom" type="PanelContainer" parent="."]
 visible = false
@@ -278,6 +282,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.60521, 0.5, -0.398693)
 [node name="Point4" type="Marker3D" parent="3D/Points"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.22594, 0.5, -1.2914)
 
+[node name="Point5" type="Marker3D" parent="3D/Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.748107, 0.5, -1.95514)
+
+[node name="Point6" type="Marker3D" parent="3D/Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.19927, 0.5, -3.12437)
+
+[node name="Point7" type="Marker3D" parent="3D/Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1235, 0.5, -1.60269)
+
+[node name="Point8" type="Marker3D" parent="3D/Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.50053, 0.5, -2.12096)
+
+[node name="Point9" type="Marker3D" parent="3D/Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.432091, 0.5, -3.13705)
+
+[node name="Point10" type="Marker3D" parent="3D/Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8974, 0.5, -3.32618)
+
+[node name="Point11" type="Marker3D" parent="3D/Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.708728, 0.5, -3.84674)
+
+[node name="Point12" type="Marker3D" parent="3D/Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.75244, 0.5, -4.36486)
+
+[node name="Point13" type="Marker3D" parent="3D/Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.82186, 0.5, -4.6186)
+
+[node name="Point14" type="Marker3D" parent="3D/Points"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.669477, 0.5, -4.49935)
+
 [node name="Map" type="CSGCombiner3D" parent="3D"]
 material_override = SubResource("StandardMaterial3D_hvo6h")
 
@@ -306,6 +340,66 @@ sides = 24
 
 [node name="CSGCylinder3D5" type="CSGCylinder3D" parent="3D/Map"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.22114, 2.38419e-07, -1.27958)
+radius = 0.637811
+height = 0.287516
+sides = 24
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="3D/Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.735448, 2.38419e-07, -1.94833)
+radius = 0.637811
+height = 0.287516
+sides = 24
+
+[node name="CSGCylinder3D7" type="CSGCylinder3D" parent="3D/Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.08873, 2.38419e-07, -1.53962)
+radius = 0.637811
+height = 0.287516
+sides = 24
+
+[node name="CSGCylinder3D8" type="CSGCylinder3D" parent="3D/Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.23867, 2.38419e-07, -3.12835)
+radius = 0.637811
+height = 0.287516
+sides = 24
+
+[node name="CSGCylinder3D9" type="CSGCylinder3D" parent="3D/Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.49112, 2.38419e-07, -2.17198)
+radius = 0.637811
+height = 0.287516
+sides = 24
+
+[node name="CSGCylinder3D10" type="CSGCylinder3D" parent="3D/Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.406667, 2.38419e-07, -3.16421)
+radius = 0.637811
+height = 0.287516
+sides = 24
+
+[node name="CSGCylinder3D11" type="CSGCylinder3D" parent="3D/Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.87289, 2.38419e-07, -3.39689)
+radius = 0.637811
+height = 0.287516
+sides = 24
+
+[node name="CSGCylinder3D12" type="CSGCylinder3D" parent="3D/Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.75332, 2.38419e-07, -4.34906)
+radius = 0.637811
+height = 0.287516
+sides = 24
+
+[node name="CSGCylinder3D13" type="CSGCylinder3D" parent="3D/Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.648727, 2.38419e-07, -4.49255)
+radius = 0.637811
+height = 0.287516
+sides = 24
+
+[node name="CSGCylinder3D14" type="CSGCylinder3D" parent="3D/Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.714472, 2.38419e-07, -3.8827)
+radius = 0.637811
+height = 0.287516
+sides = 24
+
+[node name="CSGCylinder3D15" type="CSGCylinder3D" parent="3D/Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.82209, 2.38419e-07, -4.64354)
 radius = 0.637811
 height = 0.287516
 sides = 24
@@ -395,7 +489,7 @@ horizontal_alignment = 1
 [node name="Color" type="ColorPickerButton" parent="Profile/Panel/Margin/vbox"]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
-color = Color(0.924709, 0.718624, 0.63371, 1)
+color = Color(1, 0.7, 0.634, 1)
 
 [node name="x" type="Button" parent="Profile/Panel" node_paths=PackedStringArray("Node_selected")]
 custom_minimum_size = Vector2(32, 32)
@@ -409,5 +503,8 @@ script = ExtResource("3_qj38g")
 Node_selected = NodePath("../..")
 
 [connection signal="pressed" from="Servers/Margin/vbox/buttons/Join" to="Servers" method="_on_join_pressed"]
+[connection signal="pressed" from="Buttons/Room" to="Servers" method="_on_room_pressed"]
+[connection signal="pressed" from="Buttons/Start" to="Servers" method="_on_play_pressed"]
+[connection signal="pressed" from="Buttons/Ready" to="Servers" method="_on_ready_pressed"]
 [connection signal="pressed" from="NewRoom/Screen/Panel/Margin/vbox/Create" to="Servers" method="_on_create_pressed"]
 [connection signal="pressed" from="Profile/Panel/x" to="." method="_on_x_pressed"]

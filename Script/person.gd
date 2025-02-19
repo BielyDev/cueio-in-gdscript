@@ -18,20 +18,17 @@ var is_move: bool = true
 var my_colors: Color = Color(randf_range(0,1),randf_range(0,1),randf_range(0,1))
 var kill: int
 
+var my: Dictionary
+
 var life: int = 100:
 	set(value):
 		value = clamp(value,0,100)
 		
 		life = value
 		
-		if life < 1:
-			death.rpc()
-		
 		if is_instance_valid(LifeProgress):
 			LifeProgress.get_child(0).text = str(life)
 			LifeProgress.value = value
-
-@onready var peer: Label3D = $peer
 
 @export var CamPos: Marker3D
 @export var CamPerson: Camera3D
@@ -80,7 +77,6 @@ func jump() -> void:
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		velocity.y = JUMP
 
-@rpc("any_peer","call_local")
 func death() -> void:
 	death_signal.emit()
 	
@@ -109,7 +105,7 @@ func settings_death(value: bool = false) -> void:
 	else:
 		Skeleton.get_node("Physics").physical_bones_stop_simulation()
 	
-	if is_multiplayer_authority():
+	if my.id == Host.my.id:
 		set_process_input(value)
 		set_physics_process(value)
 		CamPos.set_process_input(value)
@@ -134,9 +130,6 @@ func settings_player() -> void:
 	CamWorld.current = true
 	
 	SpinePosition.position = Vector3(0.235,-0.410,0.343)
-	#SpinePosition.rotation = Vector3(16,180,0)
-	
-	peer.text = str(name)
 	
 	var gui = preload("res://Scene/Player/gui.tscn").instantiate()
 	add_child(gui)
@@ -144,17 +137,15 @@ func settings_player() -> void:
 	Gui = gui
 	LifeProgress = gui.LifeProgress
 
-@rpc("any_peer")
 func new_kill(_death: int,_type: int) -> void:
 	kill += 1
 	
 	if is_multiplayer_authority():
 		Gui.KillNotification.start(_type)
 
-@rpc("call_local")
 func add_life(amount: int) -> void:
 	life += amount
-#@rpc("authority")
+
 func load_visual() -> void:
 	Model.get_active_material(0).set("shader_parameter/Color", my_colors)
 

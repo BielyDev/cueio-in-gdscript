@@ -7,8 +7,8 @@ extends Control
 
 
 func _on_x_pressed() -> void:
-	Host.my.nickname = name_edit.text
 	nickname.text = name_edit.text
+	Host.my.nickname = name_edit.text
 	Host.my.color = color.color
 	
-	Host.Change_my.emit()
+	Host.change_profile()

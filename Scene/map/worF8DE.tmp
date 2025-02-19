@@ -417,6 +417,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.9874, 3.8147e-06, -0.7739
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.02476, 0)
 script = ExtResource("4_ckgh3")
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scene/Player/person.tscn")
+spawn_path = NodePath("../Instance")
+
 [editable path="Map/Acc/Guia"]
 [editable path="Map/Acc/Guia2"]
 [editable path="Map/Acc/Guia3"]

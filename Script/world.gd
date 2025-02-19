@@ -6,12 +6,6 @@ const PERSON = preload("res://Scene/Player/person.tscn")
 
 func _ready() -> void:
 	OS.request_permissions()
-	
-	Server.enet.peer_connected.connect(instance_player)
-	Server.enet.peer_disconnected.connect(free_player)
-	
-	if Server.is_server:
-		instance_player(1)
 
 func instance_player(id: int):
 	var new_person = PERSON.instantiate()

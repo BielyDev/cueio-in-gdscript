@@ -7,7 +7,6 @@ extends Node
 func _ready() -> void:
 	AnimaTree.set("parameters/state/transition_request","pistol")
 
-@rpc("call_local")
 func apply_state(dir: Vector2,dir_input: Vector2,floor: bool) -> void:
 	
 	AnimaTree.set("parameters/move/walk_pos/blend_position",dir_input)
@@ -21,6 +20,5 @@ func apply_state(dir: Vector2,dir_input: Vector2,floor: bool) -> void:
 	else:
 		AnimaTree.set("parameters/move/state/blend_amount",0)
 
-@rpc("call_local")
 func shoot() -> void:
 	AnimaTree.set("parameters/pistol_state/transition_request","shoot")

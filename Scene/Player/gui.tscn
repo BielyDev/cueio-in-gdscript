@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://8iks4dhpkt4a"]
+[gd_scene load_steps=10 format=3 uid="uid://8iks4dhpkt4a"]
 
 [ext_resource type="Script" path="res://Script/gui.gd" id="1_q4kuj"]
 [ext_resource type="Script" path="res://Script/aim.gd" id="2_ni5rp"]
 [ext_resource type="PackedScene" uid="uid://cuasmxujt0f1r" path="res://Scene/Screen/kill_notification.tscn" id="2_pdr0l"]
+[ext_resource type="Script" path="res://Script/screen/PingRequest.gd" id="4_jo7he"]
 [ext_resource type="Script" path="res://Script/screen/list_kill.gd" id="4_pjq6n"]
 
 [sub_resource type="Gradient" id="Gradient_12gxc"]
@@ -60,7 +61,7 @@ theme_override_font_sizes/font_size = 41
 text = "100"
 
 [node name="Aim" type="Marker2D" parent="HUD"]
-position = Vector2(576, 324)
+position = Vector2(640, 360)
 scale = Vector2(0.7, 0.7)
 script = ExtResource("2_ni5rp")
 
@@ -80,6 +81,13 @@ grow_vertical = 2
 pivot_offset = Vector2(32, 32)
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_mqs5m")
+
+[node name="PingRequest" type="Label" parent="HUD"]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 108.0
+offset_bottom = 88.0
+script = ExtResource("4_jo7he")
 
 [node name="ListKill" type="Control" parent="."]
 layout_mode = 3
