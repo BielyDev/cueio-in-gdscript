@@ -1,0 +1,84 @@
+[gd_scene load_steps=3 format=3 uid="uid://buu82tyfxqh6r"]
+
+[ext_resource type="Script" path="res://Server.gd" id="1_wlb4l"]
+[ext_resource type="Script" path="res://gui.gd" id="2_5uv23"]
+
+[node name="Server" type="Node"]
+script = ExtResource("1_wlb4l")
+
+[node name="GUI" type="CanvasLayer" parent="."]
+script = ExtResource("2_5uv23")
+
+[node name="Interface" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Background" type="PanelContainer" parent="GUI/Interface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="vbox" type="VBoxContainer" parent="GUI/Interface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="hbox" type="HBoxContainer" parent="GUI/Interface/vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PanelPlayers" type="PanelContainer" parent="GUI/Interface/vbox/hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Scroll" type="ScrollContainer" parent="GUI/Interface/vbox/hbox/PanelPlayers"]
+layout_mode = 2
+
+[node name="list" type="VBoxContainer" parent="GUI/Interface/vbox/hbox/PanelPlayers/Scroll"]
+layout_mode = 2
+
+[node name="PanelError" type="PanelContainer" parent="GUI/Interface/vbox/hbox"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="Scroll" type="ScrollContainer" parent="GUI/Interface/vbox/hbox/PanelError"]
+layout_mode = 2
+
+[node name="list" type="VBoxContainer" parent="GUI/Interface/vbox/hbox/PanelError/Scroll"]
+layout_mode = 2
+
+[node name="PanelEvents" type="PanelContainer" parent="GUI/Interface/vbox"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+
+[node name="Scroll" type="ScrollContainer" parent="GUI/Interface/vbox/PanelEvents"]
+layout_mode = 2
+
+[node name="list" type="VBoxContainer" parent="GUI/Interface/vbox/PanelEvents/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="exit_player" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="change_profile" from="." to="GUI" method="_on_server_change_profile"]
+[connection signal="new_connection" from="." to="GUI" method="_on_server_new_connection"]
+[connection signal="new_disconnection" from="." to="GUI" method="_on_server_new_disconnection"]
+[connection signal="new_error" from="." to="GUI" method="_on_server_new_error"]
+[connection signal="new_events" from="." to="GUI" method="_on_server_new_events"]
+[connection signal="timeout" from="exit_player" to="." method="_exit_player_timeout"]
