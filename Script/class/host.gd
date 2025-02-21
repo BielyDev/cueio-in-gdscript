@@ -2,6 +2,7 @@ extends Node
 
 signal Connect_is_room(players: Array)
 signal New_player_in_room(players: Array)
+signal New_disconnection_in_room(player: Dictionary)
 signal Change_my()
 
 signal Player_position_update(id: int, position: Vector3, cam_rotation_y: int, bone_rotation_x: int)
@@ -9,6 +10,7 @@ signal Player_state_machine_update(id: int, direction: Vector2, input: Vector2, 
 signal Player_effect_bullet(id: int, position_point: Vector3)
 signal Player_shoot_demage(id: int, enemy_id: int, demage_id: int, body_area: int)
 signal Player_death(id: int, enemy_id: int, body_area: int)
+signal Player_change_gun(id: int, gun_id: int)
 
 var Enet: ENetConnection = ENetConnection.new()
 
@@ -98,5 +100,12 @@ func player_death_confirm(enemy_id: int, area_body: int) -> void:
 	my.id,
 	enemy_id,
 	area_body,
+	]),ENetPacketPeer.FLAG_UNRELIABLE_FRAGMENT)
+	Enet.flush()
+
+func player_change_gun(gun_use: int) -> void:
+	Enet.broadcast(5,var_to_bytes([MessageServer.TYPE_MESSAGE.GAME,MessageServer.GAME.PLAYER_CHANGE_GUN,
+	my.id,
+	gun_use,
 	]),ENetPacketPeer.FLAG_UNRELIABLE_FRAGMENT)
 	Enet.flush()

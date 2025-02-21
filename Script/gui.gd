@@ -4,3 +4,4 @@ extends CanvasLayer
 @onready var Aim: Marker2D = $HUD/Aim
 @onready var KillNotification: Control = $KillNotification
 @onready var ListKill: Control = $ListKill
+@onready var Events: Control = $Events

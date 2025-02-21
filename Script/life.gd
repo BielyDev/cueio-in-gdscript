@@ -4,9 +4,10 @@ extends Node3D
 @onready var anima: AnimationPlayer = $Anima
 
 func _on_area_body_entered(body: Node3D) -> void:
-	if body.is_in_group("player") and body.is_multiplayer_authority():
+	if body.is_in_group("player") and body.my.id == Host.my.id:
 		if body.life != 100:
-			body.add_life.rpc(50)
+			body.add_life(50)
+			#Host.player_
 			
 			collision_shape_3d.disabled = true
 			anima.play("finished")

@@ -22,3 +22,12 @@ func apply_state(dir: Vector2,dir_input: Vector2,floor: bool) -> void:
 
 func shoot() -> void:
 	AnimaTree.set("parameters/pistol_state/transition_request","shoot")
+	AnimaTree.set("parameters/ak_state/transition_request","shoot")
+	AnimaTree.set("parameters/knife_state/transition_request","shoot")
+
+func change_gun(type: String) -> void:
+	AnimaTree.set("parameters/pistol_state/transition_request","idle")
+	AnimaTree.set("parameters/ak_state/transition_request","idle")
+	AnimaTree.set("parameters/knife_state/transition_request","idle")
+	
+	AnimaTree.set("parameters/gun/transition_request",type)

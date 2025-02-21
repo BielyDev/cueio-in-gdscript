@@ -7,12 +7,12 @@ const PERSON = preload("res://Scene/Player/person.tscn")
 @onready var Ready: Button = $"../Buttons/Ready"
 @onready var Room: Button = $"../Buttons/Room"
 
-var HTTP: HTTPRequest = HTTPRequest.new()
 
 func _ready() -> void:
 	set_process(false)
 	Host.Connect_is_room.connect(connect_is_room)
 	Host.Change_my.connect(change_my)
+	Host.connect_to_server()
 
 func connect_is_room(players: Array) -> void:
 	if Host.my.host == true:
@@ -25,7 +25,8 @@ func _on_play_pressed() -> void:
 	Host.inicialize_play()
 
 func _on_room_pressed() -> void:
-	Host.connect_to_server()
+	#Host.connect_to_server()
+	Servers.visible = !Servers.visible
 
 func _on_ready_pressed() -> void:
 	Host.my_ready()

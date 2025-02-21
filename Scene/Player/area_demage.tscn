@@ -7,7 +7,7 @@ radius = 0.356585
 height = 1.5575
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pee6j"]
-radius = 0.183
+radius = 0.211092
 
 [node name="AreaDemage" type="Node3D"]
 script = ExtResource("1_spdpp")
@@ -26,4 +26,5 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0583022, 0)
 shape = SubResource("SphereShape3D_pee6j")

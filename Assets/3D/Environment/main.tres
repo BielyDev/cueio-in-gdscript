@@ -1,6 +1,16 @@
-[gd_resource type="Environment" load_steps=3 format=3 uid="uid://clqy13gfsma8t"]
+[gd_resource type="Environment" load_steps=5 format=3 uid="uid://clqy13gfsma8t"]
+
+[sub_resource type="Gradient" id="Gradient_4ki5a"]
+colors = PackedColorArray(0.0313726, 0.0313726, 0.176471, 1, 0.994119, 1, 0.778321, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jgylm"]
+gradient = SubResource("Gradient_4ki5a")
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_64ygf"]
+sky_top_color = Color(0.125416, 0.15797, 0.203243, 1)
+sky_horizon_color = Color(0.0874974, 0.0907395, 0.0958573, 1)
+ground_horizon_color = Color(0.0862745, 0.0901961, 0.0941176, 1)
+sun_angle_max = 0.0
 
 [sub_resource type="Sky" id="Sky_gltm6"]
 sky_material = SubResource("ProceduralSkyMaterial_64ygf")
@@ -8,3 +18,10 @@ sky_material = SubResource("ProceduralSkyMaterial_64ygf")
 [resource]
 background_mode = 2
 sky = SubResource("Sky_gltm6")
+glow_enabled = true
+fog_mode = 1
+fog_density = 1.0
+adjustment_enabled = true
+adjustment_contrast = 1.21
+adjustment_saturation = 0.59
+adjustment_color_correction = SubResource("GradientTexture1D_jgylm")

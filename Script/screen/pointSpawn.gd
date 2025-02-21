@@ -3,17 +3,22 @@ extends Node3D
 const MODEL = preload("res://Scene/Player/model.tscn")
 
 func _ready() -> void:
-	Host.New_player_in_room.connect(add_player)
-	
 	load_players(Host.players)
-	#Host..connect(remove_player)
-	pass
-	#load_players()
+	
+	Host.New_player_in_room.connect(load_players)
+	Host.New_disconnection_in_room.connect(remove_player)
 
-func add_player(players: Array) -> void:
-	load_players(players)
-func remove_player(players: Array) -> void:
-	load_players(players)
+
+func add_player(profile: Dictionary) -> void:
+	for child in get_children():
+		if child.get_child_count() == 0:
+			instance_player(child,profile)
+
+func remove_player(profile: Dictionary) -> void:
+	for child in get_children():
+		for model in child.get_children():
+			if model.name.to_int() == profile.id:
+				model.queue_free()
 
 func load_players(players: Array) -> void:
 	

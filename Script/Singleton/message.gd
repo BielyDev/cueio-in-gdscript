@@ -12,19 +12,18 @@ enum TYPE_MESSAGE {
 	INICIALIZE_GAME_REQUEST,
 	INCIALIZE_GAME_RECEIVED,
 	GAME,
+	HOST,
 }
-
 enum PROFILE_MESSAGE {
 	CONNECTION,
+	DISCONNECTION,
 	NEW_ID,
 }
-
 enum ROOM_ERROR {
 	OK,
 	COUNT_ERROR,
 	READY_ERROR,
 }
-
 enum GAME {
 	PLAYER_POSITION_UPDATE,
 	SHOOT,
@@ -33,6 +32,14 @@ enum GAME {
 	PLAYER_EFFECT_BULLET,
 	PLAYER_SHOOT_DEMAGE,
 	PLAYER_DEATH,
+	PLAYER_CHANGE_GUN,
+}
+enum HOST {
+	CREATE,
+	ENTER,
+	DELETE,
+	READY,
+	INICIALIZE,
 }
 
 
@@ -67,6 +74,12 @@ func received_message(message: Array) -> void:
 					reload_players()
 					
 					Host.Connect_is_room.emit(Host.players)
+				PROFILE_MESSAGE.DISCONNECTION:
+					for players_exit in message[2]:
+						Host.players.erase(players_exit)
+						Host.New_disconnection_in_room.emit(players_exit)
+					
+					reload_players()
 				PROFILE_MESSAGE.NEW_ID:
 					Host.my.id = message[2]
 			
@@ -122,6 +135,11 @@ func received_message(message: Array) -> void:
 						message[2], # ID
 						message[3], # ENEMY_ID
 						message[4], # AREA_BODY
+						)
+				GAME.PLAYER_CHANGE_GUN:
+					Host.Player_change_gun.emit(
+						message[2], # ID
+						message[3], # GUN ID
 						)
 
 

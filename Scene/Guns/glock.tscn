@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://dtrgrxp3gk380"]
+[gd_scene load_steps=15 format=4 uid="uid://dtrgrxp3gk380"]
 
 [ext_resource type="Texture2D" uid="uid://dymkeso4hswk4" path="res://Assets/3D/Base Base Color.png" id="1_gjsgd"]
 [ext_resource type="Script" path="res://Script/class/gun.gd" id="1_xbvj4"]
@@ -135,6 +135,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_so6fo")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lds7l"]
+albedo_color = Color(0.307177, 0.307177, 0.307177, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dhq7a"]
+albedo_color = Color(0.624473, 0.624473, 0.624473, 1)
+
 [sub_resource type="ArrayMesh" id="ArrayMesh_ogb8h"]
 _surfaces = [{
 "aabb": AABB(-3.33155, -0.441013, -1.03822, 7.22713, 0.855587, 2.07645),
@@ -215,6 +221,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ogb8h")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1w2or"]
+albedo_color = Color(0.307177, 0.307177, 0.307177, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4fbg7"]
+albedo_color = Color(0.624473, 0.624473, 0.624473, 1)
+
 [node name="Glock" type="Node3D"]
 script = ExtResource("1_xbvj4")
 
@@ -225,8 +237,15 @@ transform = Transform3D(0.0215382, 0.243866, 0.0317797, 0.236883, -0.012, -0.068
 transform = Transform3D(0.110783, 0, 0, 0, 0.110783, 0, 0, 0, 0.110783, -0.174896, 0.22157, 0)
 mesh = SubResource("ArrayMesh_8fgxm")
 skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_lds7l")
+surface_material_override/1 = SubResource("StandardMaterial3D_dhq7a")
 
 [node name="Cube_001" type="MeshInstance3D" parent="Glock_futurista"]
 transform = Transform3D(0.110783, 0, 0, 0, 0.110783, 0, 0, 0, 0.110783, 0.515779, 0.279294, 0)
 mesh = SubResource("ArrayMesh_x3782")
 skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_1w2or")
+surface_material_override/1 = SubResource("StandardMaterial3D_4fbg7")
+
+[node name="Point" type="Marker3D" parent="."]
+transform = Transform3D(0.0215382, 0.243866, 0.0317797, 0.236883, -0.012, -0.0684604, -0.0660826, 0.036467, -0.235048, 0.166424, 0.15368, -0.0517994)

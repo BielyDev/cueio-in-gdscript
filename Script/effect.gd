@@ -14,7 +14,7 @@ static func spawn_shoot_fire(pos: Vector3, count: int = 2) -> void:
 	
 	new_spawn.global_position = pos
 
-@rpc("any_peer","call_local")
+
 static func bullet_destroyer(pos: Vector3, normal: Vector3 = Vector3()) -> void:
 	var new_destroyer = BULLET_DESTROYER.instantiate()
 	

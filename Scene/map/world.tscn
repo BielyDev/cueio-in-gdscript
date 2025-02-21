@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bitpeti18vgu2"]
+[gd_scene load_steps=20 format=3 uid="uid://bitpeti18vgu2"]
 
 [ext_resource type="Script" path="res://Script/world.gd" id="1_civj8"]
 [ext_resource type="Texture2D" uid="uid://dxbhvkubiaqkg" path="res://addons/kenney_prototype_textures/purple/texture_01.png" id="3_32l2o"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://jdrxsh0vhmw5" path="res://Scene/effect/trampoli.tscn" id="7_wbjs4"]
 [ext_resource type="PackedScene" uid="uid://cwee3744qxli7" path="res://Scene/resource/guia.tscn" id="8_dhcde"]
 [ext_resource type="Environment" uid="uid://clqy13gfsma8t" path="res://Assets/3D/Environment/main.tres" id="9_5k7of"]
+[ext_resource type="PackedScene" uid="uid://u4lao7qldft5" path="res://Scene/resource/tochas.tscn" id="9_hqa4m"]
 [ext_resource type="PackedScene" uid="uid://bsxunw35obtwa" path="res://Scene/resource/guia_model.tscn" id="9_s1qsy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m8tmf"]
@@ -81,6 +82,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 19.7675, 0)
 radius = 40.8189
 height = 56.1757
 sides = 20
+smooth_faces = false
 material = SubResource("StandardMaterial3D_cvjl5")
 
 [node name="CSGCylinder3D11" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D/CSGCylinder3D10"]
@@ -88,18 +90,21 @@ operation = 2
 radius = 38.1447
 height = 56.1757
 sides = 32
+smooth_faces = false
 material = SubResource("StandardMaterial3D_uq7vm")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D"]
 transform = Transform3D(0.982626, 0, 0.185598, 0, 1, 0, -0.185598, 0, 0.982626, -9.3114, 3.93528, -8.33032)
 radius = 2.73233
 height = 8.91766
+smooth_faces = false
 material = SubResource("StandardMaterial3D_2if4d")
 
 [node name="CSGCylinder3D15" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D/CSGCylinder3D"]
 operation = 2
 radius = 2.12799
 height = 9.30025
+smooth_faces = false
 material = SubResource("StandardMaterial3D_2if4d")
 
 [node name="CSGCylinder3D16" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D/CSGCylinder3D"]
@@ -107,102 +112,120 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.52853, -2.88594, -0.274221)
 operation = 2
 radius = 0.972529
 height = 3.65079
+smooth_faces = false
 material = SubResource("StandardMaterial3D_2if4d")
 
 [node name="CSGCylinder3D6" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.3282, -1.77485, 8.76233)
 radius = 1.79486
 height = 8.91766
+smooth_faces = false
 material = SubResource("StandardMaterial3D_2if4d")
 
 [node name="CSGCylinder3D9" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.7817, -2.98322, 9.50333)
 radius = 1.79486
 height = 8.91766
+smooth_faces = false
 material = SubResource("StandardMaterial3D_2if4d")
 
 [node name="CSGCylinder3D7" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.4688, -0.43147, 11.433)
 radius = 1.79486
 height = 8.91766
+smooth_faces = false
 material = SubResource("StandardMaterial3D_2if4d")
 
 [node name="CSGCylinder3D8" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.4291, 0.559897, 11.7483)
 radius = 1.79486
 height = 8.91766
+smooth_faces = false
 material = SubResource("StandardMaterial3D_2if4d")
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.29583, 3.93528, 11.1835)
 radius = 1.79486
 height = 8.91766
+smooth_faces = false
 material = SubResource("StandardMaterial3D_2if4d")
 
 [node name="CSGCylinder3D11" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.30828, 3.93528, 30.6225)
 radius = 3.54199
 height = 8.91766
+smooth_faces = false
 material = SubResource("StandardMaterial3D_2if4d")
 
 [node name="CSGCylinder3D12" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.4766, 3.93528, 11.1954)
 radius = 3.54199
 height = 23.0369
+sides = 17
+smooth_faces = false
 material = SubResource("StandardMaterial3D_2if4d")
 
 [node name="CSGCylinder3D13" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, -0.999916, -0.0129849, 0, 0.0129849, -0.999916, 29.7398, 3.93528, 5.25309)
 radius = 3.54199
 height = 23.0369
+smooth_faces = false
 material = SubResource("StandardMaterial3D_2if4d")
 
 [node name="CSGCylinder3D14" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D"]
 transform = Transform3D(0.409382, 0.00442674, 0.912352, -1.49012e-08, -0.999988, 0.00485196, 0.912363, -0.00198631, -0.409377, -15.2936, 3.11893, -27.108)
 radius = 3.54199
 height = 23.0369
+smooth_faces = false
 material = SubResource("StandardMaterial3D_2if4d")
 
 [node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.9636, 3.93528, -4.47613)
 radius = 3.75394
 height = 8.91766
+smooth_faces = false
 material = SubResource("StandardMaterial3D_2if4d")
 
 [node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.93127, 3.93528, -25.5805)
 radius = 1.79486
 height = 8.91766
+smooth_faces = false
 material = SubResource("StandardMaterial3D_2if4d")
 
 [node name="CSGCylinder3D5" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.3534, 3.93528, 22.7639)
 radius = 1.79486
 height = 8.91766
+smooth_faces = false
 material = SubResource("StandardMaterial3D_2if4d")
 
 [node name="CSGCylinder3D15" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -21.7541, 3.93528, -9.91669)
 radius = 2.39927
 height = 14.9059
+smooth_faces = false
 material = SubResource("StandardMaterial3D_2if4d")
 
 [node name="CSGCylinder3D16" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.0739, 3.93528, 5.36039)
 radius = 0.967303
 height = 13.9143
+smooth_faces = false
 material = SubResource("StandardMaterial3D_2if4d")
 
 [node name="CSGCylinder3D17" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9621, 3.71109, 4.18272)
 radius = 0.967303
 height = 8.41146
+smooth_faces = false
 material = SubResource("StandardMaterial3D_2if4d")
 
 [node name="CSGCylinder3D18" type="CSGCylinder3D" parent="Map/Model/CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9621, 3.71109, 4.18272)
 radius = 0.967303
 height = 8.41146
+smooth_faces = false
 material = SubResource("StandardMaterial3D_2if4d")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Map/Model/CSGCombiner3D"]
@@ -379,6 +402,47 @@ curve = SubResource("Curve3D_vu3dh")
 
 [node name="Guia_model2" parent="Map/Acc/Guia3" instance=ExtResource("9_s1qsy")]
 transform = Transform3D(0.695462, 0, -0.718563, 0, 1, 0, 0.718563, 0, 0.695462, 7.41336, -7.63018, -11.085)
+
+[node name="Tochas" type="Node3D" parent="Map"]
+
+[node name="Tochas" parent="Map/Tochas" instance=ExtResource("9_hqa4m")]
+transform = Transform3D(0.610322, 0.652524, 0.449132, -0.730329, 0.683095, 0, -0.3068, -0.328014, 0.893465, -3.47231, 2.67466, 4.715)
+
+[node name="Tochas2" parent="Map/Tochas" instance=ExtResource("9_hqa4m")]
+transform = Transform3D(-0.67074, -0.717119, 0.189335, -0.730329, 0.683095, -1.33852e-08, -0.129334, -0.138277, -0.981912, 2.24446, 1.68011, 11.0648)
+
+[node name="Tochas3" parent="Map/Tochas" instance=ExtResource("9_hqa4m")]
+transform = Transform3D(0.382832, 0.409303, -0.828197, -0.730329, 0.683095, 8.19739e-10, 0.565738, 0.604857, 0.560437, 16.6366, 1.33478, 12.8293)
+
+[node name="Tochas4" parent="Map/Tochas" instance=ExtResource("9_hqa4m")]
+transform = Transform3D(0.447377, 0.478311, 0.755693, -0.730329, 0.683095, 1.83418e-08, -0.516211, -0.551905, 0.654925, 23.3142, 1.33478, 21.3258)
+
+[node name="Tochas5" parent="Map/Tochas" instance=ExtResource("9_hqa4m")]
+transform = Transform3D(-0.58259, -0.622874, -0.522127, -0.730329, 0.683095, 5.41134e-08, 0.356662, 0.381324, -0.852868, 27.0168, 2.69452, 7.70189)
+
+[node name="Tochas6" parent="Map/Tochas" instance=ExtResource("9_hqa4m")]
+transform = Transform3D(-0.68307, -0.730303, 0.00855193, -0.730329, 0.683095, 5.41134e-08, -0.00584187, -0.00624576, -0.999963, 37.389, 2.69452, -2.23849)
+
+[node name="Tochas7" parent="Map/Tochas" instance=ExtResource("9_hqa4m")]
+transform = Transform3D(0.594477, 0.635584, 0.492576, -0.730329, 0.683095, 5.37465e-08, -0.336476, -0.359742, 0.87027, 10.6063, 2.69452, 28.8082)
+
+[node name="Tochas8" parent="Map/Tochas" instance=ExtResource("9_hqa4m")]
+transform = Transform3D(-0.487135, -0.520818, -0.701034, -0.730329, 0.683095, 8.58153e-08, 0.478873, 0.511986, -0.713128, 4.43207, 2.69452, 32.7375)
+
+[node name="Tochas9" parent="Map/Tochas" instance=ExtResource("9_hqa4m")]
+transform = Transform3D(-0.0474124, -0.0506908, -0.997588, -0.730329, 0.683095, 1.08225e-07, 0.681448, 0.728568, -0.069408, 20.0643, 0.87321, -31.9748)
+
+[node name="Tochas13" parent="Map/Tochas" instance=ExtResource("9_hqa4m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.4203, 0.612062, -17.8355)
+
+[node name="Tochas10" parent="Map/Tochas" instance=ExtResource("9_hqa4m")]
+transform = Transform3D(0.538895, 0.576158, 0.61452, -0.730329, 0.683095, 1.06608e-07, -0.419775, -0.448802, 0.788902, 8.39242, 0.87321, -26.5444)
+
+[node name="Tochas11" parent="Map/Tochas" instance=ExtResource("9_hqa4m")]
+transform = Transform3D(-0.681958, -0.729113, -0.0576863, -0.730329, 0.683095, 7.86104e-08, 0.0394051, 0.0421299, -0.998335, 14.7457, 2.0016, 9.32873)
+
+[node name="Tochas12" parent="Map/Tochas" instance=ExtResource("9_hqa4m")]
+transform = Transform3D(0.138441, 0.148014, 0.979248, -0.730329, 0.683095, 7.912e-08, -0.66892, -0.715173, 0.202667, 15.9162, 3.63636, 9.83266)
 
 [node name="Settings" type="Node" parent="."]
 

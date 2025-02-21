@@ -2,18 +2,24 @@
     "Knife" : {
         "id" : 0,
         "type" : 3,
-        "time" : 1,
-        "distance" : 5,
+        "animation" : "knife",
+        "time" : 0.6,
+        "one_shoot" : true,
+        "distance" : 2,
+        "spread" : 1,
         "demage" : 50,
-        "head_demage" : 50,
+        "head_demage" : 75,
 
-        "path" : ""
+        "path" : "res://Scene/Guns/knife.tscn"
     },
     "Glock" : {
         "id" : 1,
         "type" : 2,
-        "time" : 0.3,
-        "distance" : 25,
+        "animation" : "pistol",
+        "time" : 0.2, 
+        "one_shoot" : true,
+        "distance" : 30,
+        "spread" : 0.08,
         "demage" : 25,
         "head_demage" : 50,
 
@@ -22,12 +28,15 @@
     "AK-47" : {
         "id" : 2,
         "type" : 1,
+        "animation" : "ak",
         "time" : 0.1,
-        "distance" : 35,
+        "one_shoot" : false,
+        "distance" : 40,
+        "spread" : 0.15,
         "demage" : 15,
         "head_demage" : 25,
 
-        "path" : ""
+        "path" : "res://Scene/Guns/ak47.tscn"
     }
 
 }

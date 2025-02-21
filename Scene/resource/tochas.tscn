@@ -1,0 +1,69 @@
+[gd_scene load_steps=11 format=3 uid="uid://u4lao7qldft5"]
+
+[ext_resource type="Texture2D" uid="uid://dxvi5wq3acoq8" path="res://addons/kenney_particle_pack/fire_01.png" id="1_2tjvl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_c8asb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wfb1r"]
+disable_receive_shadows = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6vre4"]
+transparency = 1
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(1, 1, 0, 1)
+albedo_texture = ExtResource("1_2tjvl")
+emission_enabled = true
+emission = Color(1, 0.192157, 0, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_2ieb2"]
+offsets = PackedFloat32Array(0, 0.246753)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.698039, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lvcsm"]
+gradient = SubResource("Gradient_2ieb2")
+
+[sub_resource type="Curve" id="Curve_fivgd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.72774, 0.793974), -1.45157, -1.45157, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_vh8i2"]
+curve = SubResource("Curve_fivgd")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lyr5a"]
+angle_min = -395.3
+angle_max = 196.7
+gravity = Vector3(0, 1, 0)
+scale_min = 0.6
+scale_max = 1.27
+scale_curve = SubResource("CurveTexture_vh8i2")
+color_ramp = SubResource("GradientTexture1D_lvcsm")
+
+[sub_resource type="QuadMesh" id="QuadMesh_3rhxl"]
+
+[node name="Tochas" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.16117, 0, 0, 0, 1, 0, 0, 0, 0.16117, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("BoxMesh_c8asb")
+surface_material_override/0 = SubResource("StandardMaterial3D_wfb1r")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56818, 0)
+material_override = SubResource("StandardMaterial3D_6vre4")
+cast_shadow = 0
+process_material = SubResource("ParticleProcessMaterial_lyr5a")
+draw_pass_1 = SubResource("QuadMesh_3rhxl")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.595679, 0)
+light_color = Color(1, 0.913725, 0.8, 1)
+light_energy = 5.556
+shadow_enabled = true
+omni_range = 32.4738

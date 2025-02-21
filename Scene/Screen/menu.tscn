@@ -256,6 +256,104 @@ flat = true
 script = ExtResource("3_qj38g")
 Node_selected = NodePath("../../..")
 
+[node name="PingRequest" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1213.0
+offset_right = 1278.0
+offset_bottom = 27.0
+script = ExtResource("10_olmys")
+
+[node name="nickname" type="Button" parent="." node_paths=PackedStringArray("Node_selected")]
+layout_mode = 2
+offset_left = 7.0
+offset_top = 11.0
+offset_right = 178.0
+offset_bottom = 42.0
+text = "My_nickname"
+script = ExtResource("3_qj38g")
+Node_selected = NodePath("../Profile")
+
+[node name="Profile" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Background" type="PanelContainer" parent="Profile"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="PanelContainer" parent="Profile"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.397266
+anchor_top = 0.404861
+anchor_right = 0.602734
+anchor_bottom = 0.595139
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Margin" type="MarginContainer" parent="Profile/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="vbox" type="VBoxContainer" parent="Profile/Panel/Margin"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Profile/Panel/Margin/vbox"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Profile/Panel/Margin/vbox"]
+layout_mode = 2
+text = "Name"
+horizontal_alignment = 1
+
+[node name="name" type="LineEdit" parent="Profile/Panel/Margin/vbox"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "My_name"
+placeholder_text = "Nickname"
+alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Profile/Panel/Margin/vbox"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="Profile/Panel/Margin/vbox"]
+layout_mode = 2
+text = "Color"
+horizontal_alignment = 1
+
+[node name="Color" type="ColorPickerButton" parent="Profile/Panel/Margin/vbox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+color = Color(1, 0.7, 0.634, 1)
+
+[node name="x" type="Button" parent="Profile/Panel" node_paths=PackedStringArray("Node_selected")]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+mouse_default_cursor_shape = 2
+text = "x"
+flat = true
+script = ExtResource("3_qj38g")
+Node_selected = NodePath("../..")
+
 [node name="3D" type="Node3D" parent="."]
 
 [node name="Settings" type="Node" parent="3D"]
@@ -403,104 +501,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.82209, 2.38419e-07, -4.643
 radius = 0.637811
 height = 0.287516
 sides = 24
-
-[node name="PingRequest" type="Label" parent="."]
-layout_mode = 0
-offset_left = 1213.0
-offset_right = 1278.0
-offset_bottom = 27.0
-script = ExtResource("10_olmys")
-
-[node name="nickname" type="Button" parent="." node_paths=PackedStringArray("Node_selected")]
-layout_mode = 2
-offset_left = 7.0
-offset_top = 11.0
-offset_right = 178.0
-offset_bottom = 42.0
-text = "My_nickname"
-script = ExtResource("3_qj38g")
-Node_selected = NodePath("../Profile")
-
-[node name="Profile" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Background" type="PanelContainer" parent="Profile"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Panel" type="PanelContainer" parent="Profile"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.397266
-anchor_top = 0.404861
-anchor_right = 0.602734
-anchor_bottom = 0.595139
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="Margin" type="MarginContainer" parent="Profile/Panel"]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="vbox" type="VBoxContainer" parent="Profile/Panel/Margin"]
-layout_mode = 2
-
-[node name="HSeparator2" type="HSeparator" parent="Profile/Panel/Margin/vbox"]
-visible = false
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Profile/Panel/Margin/vbox"]
-layout_mode = 2
-text = "Name"
-horizontal_alignment = 1
-
-[node name="name" type="LineEdit" parent="Profile/Panel/Margin/vbox"]
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-text = "My_name"
-placeholder_text = "Nickname"
-alignment = 1
-
-[node name="HSeparator" type="HSeparator" parent="Profile/Panel/Margin/vbox"]
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="Profile/Panel/Margin/vbox"]
-layout_mode = 2
-text = "Color"
-horizontal_alignment = 1
-
-[node name="Color" type="ColorPickerButton" parent="Profile/Panel/Margin/vbox"]
-custom_minimum_size = Vector2(0, 30)
-layout_mode = 2
-color = Color(1, 0.7, 0.634, 1)
-
-[node name="x" type="Button" parent="Profile/Panel" node_paths=PackedStringArray("Node_selected")]
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 0
-mouse_default_cursor_shape = 2
-text = "x"
-flat = true
-script = ExtResource("3_qj38g")
-Node_selected = NodePath("../..")
 
 [connection signal="pressed" from="Servers/Margin/vbox/buttons/Join" to="Servers" method="_on_join_pressed"]
 [connection signal="pressed" from="Buttons/Room" to="Servers" method="_on_room_pressed"]

@@ -36,13 +36,12 @@ func _physics_process(delta: float) -> void:
 	gravity()
 	jump()
 	aim_detected()
+	Gun.bullet()
 	State.apply_state(direction,Input.get_vector("left","right","down","up"),is_on_floor())
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		Gun.bullet()
-		Gun.input_change_gun()
+	Gun.input_change_gun()
 	
 	if Input.is_action_just_pressed("pause"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
@@ -51,11 +50,14 @@ func _input(event: InputEvent) -> void:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func effect_bullet(end_pos: Vector3) -> void:
+	State.shoot()
+	
+	if Gun.get_gun().animation == "knife": return
+	
 	var new_bullet = BULLET.instantiate()
 	
-	State.shoot()
 	Index.add_child(new_bullet)
-	new_bullet.global_position = point.global_position
+	new_bullet.global_position = Gun.get_child(0).get_node("Point").global_position
 	new_bullet.pos_final = end_pos
 
 var peer_transform = {
@@ -88,3 +90,11 @@ func _on_position_timeout() -> void:
 func verify_death(id: int, enemy_id: int, body_area: int) -> void:
 	if id == my.id:
 		death()
+	
+	var quem_matou
+	for player in Host.players:
+		if player.id == id:
+			quem_matou = player
+	
+	if Host.my.id == my.id:
+		Gui.Events.add_text(str("[color=tomato]",my.nickname,"[/color] foi morto por [color=yellow]",quem_matou.nickname,"[/color]!"))
